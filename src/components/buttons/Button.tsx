@@ -11,7 +11,7 @@ const Button = (props: Props) => {
     <div
       onClick={props.handleClick}
       style={props.style}
-      className={`flex justify-center items-center hover:cursor-pointer ${props.className}`}
+      className={`flex justify-center items-center hover:cursor-pointer hover:scale-105 hover:drop-shadow-md ${props.className}`}
     >
       {props.children}
     </div>

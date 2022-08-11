@@ -15,7 +15,7 @@ const HomeFilter = () => {
       {/* search button */}
       <Button
         className="bg-[#549DF2] w-[74px] rounded-[100px] h-[33px] px-[12px] py-[7px] mr-[62px]"
-        style={{ color: "white" }}
+        style={{ color: "white", transition: "ease-in 0.2s" }}
         handleClick={() => null}
       >
         Search
