@@ -1,5 +1,13 @@
+import HomeFilter from "../../components/homeFilter/HomeFilter";
+import Movies from "../../components/movies/Movies";
+
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <>
+      <HomeFilter />
+      <Movies />
+    </>
+  );
 };
 
 export default Home;
