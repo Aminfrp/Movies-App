@@ -31,7 +31,7 @@ const Pagination = (props: Props) => {
         ></span>
         <p
           className={`font-[700] ${
-            movies?.page !== 500
+            movies?.page !== movies?.total_pages && movies?.page !== 500
               ? "text-[#318FE7] hover:cursor-pointer"
               : "text-[#0000007A]"
           }`}

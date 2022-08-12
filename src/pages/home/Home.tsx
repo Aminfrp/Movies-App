@@ -6,8 +6,17 @@ import moviesAxios from "../../axios/moviesAxios";
 import { IMovies } from "../../interfaces/movies";
 
 const Home = () => {
+  // filter
+  const [releaseDate, setReleaseDate] = useState<[Date, Date]>([
+    new Date(),
+    new Date(),
+  ]);
+  const [dateFilter, setDateFilter] = useState<boolean>(false);
+
+  // data
   const [movies, setMovies] = useState<IMovies | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  // pagination
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [skip, setSkip] = useState<{ start: number; end: number }>({
     start: 1,
@@ -18,13 +27,17 @@ const Home = () => {
   const getMoviesList = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await moviesAxios.getMovies(pageNumber);
+      const response = await moviesAxios.getMovies(
+        pageNumber,
+        releaseDate,
+        dateFilter
+      );
       setMovies(response.data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
     }
-  }, [pageNumber]);
+  }, [pageNumber, releaseDate, dateFilter]);
 
   useEffect(() => {
     getMoviesList();
@@ -32,7 +45,7 @@ const Home = () => {
 
   // next page
   const handleNextPage = () => {
-    if (pageNumber !== 500) {
+    if (pageNumber !== 500 && movies?.page !== movies?.total_pages) {
       setPageNumber(pageNumber + 1);
       setSkip({ start: skip.end, end: skip.end + 20 });
     }
@@ -49,9 +62,19 @@ const Home = () => {
     }
   };
 
+  // filter movies
+  const searchMovies = () => {
+    getMoviesList();
+  };
+
   return (
     <>
-      <HomeFilter />
+      <HomeFilter
+        releaseDate={releaseDate}
+        setReleaseDate={setReleaseDate}
+        showDate={dateFilter}
+        setShowDate={setDateFilter}
+      />
       <Movies movies={movies} loading={loading} />
       <Pagination
         movies={movies}

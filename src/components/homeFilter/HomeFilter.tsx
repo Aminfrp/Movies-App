@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Button from "../buttons/Button";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import { Box, ClickAwayListener } from "@mui/material";
@@ -6,15 +6,15 @@ import ClearIcon from "@mui/icons-material/Clear";
 /* eslint-disable */
 declare module "@wojtekmaj/react-daterange-picker";
 
-const HomeFilter = () => {
+interface Props {
+  setReleaseDate: Dispatch<SetStateAction<[Date, Date]>>;
+  releaseDate: Date[];
+  setShowDate: Dispatch<SetStateAction<boolean>>;
+  showDate: boolean;
+}
+const HomeFilter = (props: Props) => {
+  const { releaseDate, setReleaseDate, setShowDate, showDate } = props;
   const [open, toggle] = useState<boolean>(false);
-  const [showDate, setShowDate] = useState<boolean>(false);
-  const [releaseDate, setReleaseDate] = useState<[Date, Date]>([
-    new Date(),
-    new Date(),
-  ]);
-
-  console.log(showDate);
 
   useEffect(() => {
     toggle(false);
@@ -33,7 +33,7 @@ const HomeFilter = () => {
           <span className="flex">
             <Box
               component="div"
-              className="w-[221px] h-[33px] border border-[#CFCFCF] text-[12px] flex items-center justify-center"
+              className="w-[221px] h-[33px] border border-[#CFCFCF] text-[12px] flex items-center justify-center hover:cursor-pointer"
               style={{ backgroundColor: "white" }}
               onClick={() => toggle(true)}
             >
@@ -70,6 +70,7 @@ const HomeFilter = () => {
         className="bg-[#549DF2] w-[74px] rounded-[100px] h-[33px] px-[12px] py-[7px] mr-[62px]"
         style={{ color: "white", transition: "ease-in 0.2s" }}
         handleClick={() => null}
+        disabled={showDate}
       >
         Search
       </Button>
