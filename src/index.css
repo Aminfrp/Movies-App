@@ -10,3 +10,9 @@
     margin: 0;
     font-family: "roboto";
 }
+.react-daterange-picker__wrapper{
+    display: none;
+}
+.react-calendar__tile--active{
+    background-color: rgb(17 185 128 / var(--tw-bg-opacity));
+}

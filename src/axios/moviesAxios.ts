@@ -2,7 +2,10 @@ import axios from "axios";
 import { IMovies } from "../interfaces/movies";
 import { apiKey, baseUrl } from "../utails";
 
-const instance = axios.create({baseURL:`${baseUrl}/`,params:{api_key:apiKey}});
+const instance = axios.create({baseURL:`${baseUrl}/`,params:{api_key:apiKey},headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "text/plain",
+  }});
 
 const apis =  {
     getMovies : (pageNumber:number) => {

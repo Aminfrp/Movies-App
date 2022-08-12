@@ -9,14 +9,14 @@ const LoadingMovie = () => {
       {/* poster */}
       <Skeleton
         variant="rectangular"
-        className="rounded-l-[6px] w-[128px]"
-        height="100%"
+        className="rounded-l-[6px] w-[128px] m-2"
+        height="92%"
       />
       {/* desctioption of movie */}
       <div className="flex flex-col justify-between pr-[17px]">
         <Skeleton
           variant="text"
-          className="ml-[14px] pt-[16px]"
+          className="ml-[14px] pt-[16px] "
           width="180px"
         />
         <div>
