@@ -3,7 +3,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const DetailsHeader = () => {
   return (
-    <div className="h-[85px] bg-[#E2E2E2] rounded-[6px] mt-[69px] mx-[208px] mb-[119px] flex items-center">
+    <div className="h-[85px] bg-[#E2E2E2] rounded-[6px] mt-[69px] mx-[208px] mb-[78px] flex items-center">
       {/* back button */}
       <Button
         className="bg-[#549DF2] w-[92px] rounded-[100px] ml-[35px] p-[7px]"
