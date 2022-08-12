@@ -1,5 +1,7 @@
+import DetailsHeader from "../../components/detailsHeader/DetailsHeader";
+
 const Details = () => {
-  return <div>Details</div>;
+  return <DetailsHeader />;
 };
 
 export default Details;
