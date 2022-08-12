@@ -10,7 +10,7 @@ interface Props {
 const Button = (props: Props) => {
   return (
     <div
-      onClick={props.disabled ? () => {} : props.handleClick}
+      onClick={!props.disabled ? () => {} : props.handleClick}
       style={props.style}
       className={`flex justify-center items-center ${
         props.disabled &&

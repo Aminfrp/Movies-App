@@ -11,9 +11,20 @@ interface Props {
   releaseDate: Date[];
   setShowDate: Dispatch<SetStateAction<boolean>>;
   showDate: boolean;
+  searchMovies: () => Promise<void>;
+  setFilterFlag: Dispatch<SetStateAction<boolean>>;
+  setPageNumber: Dispatch<SetStateAction<number>>;
 }
 const HomeFilter = (props: Props) => {
-  const { releaseDate, setReleaseDate, setShowDate, showDate } = props;
+  const {
+    releaseDate,
+    setReleaseDate,
+    setShowDate,
+    showDate,
+    searchMovies,
+    setFilterFlag,
+    setPageNumber,
+  } = props;
   const [open, toggle] = useState<boolean>(false);
 
   useEffect(() => {
@@ -49,6 +60,8 @@ const HomeFilter = (props: Props) => {
                   onClick={() => {
                     setReleaseDate([new Date(), new Date()]);
                     setShowDate(false);
+                    setFilterFlag(false);
+                    setPageNumber(1);
                   }}
                 />
               )}
@@ -69,7 +82,7 @@ const HomeFilter = (props: Props) => {
       <Button
         className="bg-[#549DF2] w-[74px] rounded-[100px] h-[33px] px-[12px] py-[7px] mr-[62px]"
         style={{ color: "white", transition: "ease-in 0.2s" }}
-        handleClick={() => null}
+        handleClick={searchMovies}
         disabled={showDate}
       >
         Search

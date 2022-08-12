@@ -7,11 +7,12 @@ import { IMovies } from "../../interfaces/movies";
 
 const Home = () => {
   // filter
-  const [releaseDate, setReleaseDate] = useState<[Date, Date]>([
+  const [releaseDates, setReleaseDates] = useState<[Date, Date]>([
     new Date(),
     new Date(),
   ]);
   const [dateFilter, setDateFilter] = useState<boolean>(false);
+  const [filterFlag, setFilterFlag] = useState<boolean>(false);
 
   // data
   const [movies, setMovies] = useState<IMovies | null>(null);
@@ -23,25 +24,35 @@ const Home = () => {
     end: 20,
   });
 
+  console.log("amin");
+
   // get movies from server
-  const getMoviesList = useCallback(async () => {
-    setLoading(true);
-    try {
-      const response = await moviesAxios.getMovies(
-        pageNumber,
-        releaseDate,
-        dateFilter
-      );
-      setMovies(response.data);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-    }
-  }, [pageNumber, releaseDate, dateFilter]);
+  const getMoviesList = useCallback(
+    async (pageNumber: number, releaseDate?: Date[], dateFilter?: boolean) => {
+      setLoading(true);
+      try {
+        const response = await moviesAxios.getMovies(
+          pageNumber,
+          releaseDate,
+          dateFilter
+        );
+        setMovies(response.data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+      }
+    },
+    []
+  );
 
   useEffect(() => {
-    getMoviesList();
-  }, [getMoviesList, pageNumber]);
+    if (filterFlag) {
+      getMoviesList(pageNumber, releaseDates, dateFilter);
+    } else {
+      getMoviesList(pageNumber, releaseDates, false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filterFlag, getMoviesList, pageNumber]);
 
   // next page
   const handleNextPage = () => {
@@ -63,17 +74,22 @@ const Home = () => {
   };
 
   // filter movies
-  const searchMovies = () => {
-    getMoviesList();
+  const searchMovies = async () => {
+    setPageNumber(1);
+    setFilterFlag(true);
+    await getMoviesList(pageNumber, releaseDates, dateFilter);
   };
 
   return (
     <>
       <HomeFilter
-        releaseDate={releaseDate}
-        setReleaseDate={setReleaseDate}
+        releaseDate={releaseDates}
+        setReleaseDate={setReleaseDates}
         showDate={dateFilter}
         setShowDate={setDateFilter}
+        searchMovies={searchMovies}
+        setFilterFlag={setFilterFlag}
+        setPageNumber={setPageNumber}
       />
       <Movies movies={movies} loading={loading} />
       <Pagination
