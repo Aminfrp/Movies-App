@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IMovies } from "../interfaces/movies";
+import { IMovies, ISingleMovie } from "../interfaces/movies";
 import { apiKey, baseUrl } from "../utails";
 
 const instance = axios.create({
@@ -26,7 +26,7 @@ const apis = {
     });
   },
   getSingleMovie: (movieId: number) => {
-    return instance.get(`/movie/${movieId}`);
+    return instance.get<ISingleMovie>(`/movie/${movieId}`);
   },
 };
 

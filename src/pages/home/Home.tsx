@@ -24,8 +24,6 @@ const Home = () => {
     end: 20,
   });
 
-  console.log("amin");
-
   // get movies from server
   const getMoviesList = useCallback(
     async (pageNumber: number, releaseDate?: Date[], dateFilter?: boolean) => {
