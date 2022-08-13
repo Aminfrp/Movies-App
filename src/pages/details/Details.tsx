@@ -1,4 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import DetailsHeader from "../../components/detailsHeader/DetailsHeader";
 import DetailsInfo from "../../components/detailsInfo/DetailsInfo";
 import { ICredits, ISingleMovie } from "../../interfaces/movies";
@@ -8,7 +14,13 @@ import LoadingDetailsHeader from "../../components/detailsHeader/LoadingDetailsH
 import LoadingDetailsInfo from "../../components/detailsInfo/LoadingDetailsInfo";
 import { Skeleton } from "@mui/material";
 
-const Details = () => {
+const Details = ({
+  pageNumber,
+  setPageNumber,
+}: {
+  pageNumber: number;
+  setPageNumber: Dispatch<SetStateAction<number>>;
+}) => {
   const [singleMovie, setSingleMovie] = useState<ISingleMovie | null>(null);
   const [credits, setCredits] = useState<ICredits | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -62,16 +74,21 @@ const Details = () => {
         <>
           <LoadingDetailsHeader />
           <LoadingDetailsInfo />
-          <div className="flex flex-col mb-[400px] mt-[80px] mx-[208px]">
+          <div className="mx-[208px]">
+            <Skeleton variant="text" width={"100%"} sx={{ fontSize: "1rem" }} />
+            <Skeleton variant="text" width={"100%"} sx={{ fontSize: "1rem" }} />
+            <Skeleton variant="text" width={"100%"} sx={{ fontSize: "1rem" }} />
+            <Skeleton variant="text" width={"100%"} sx={{ fontSize: "1rem" }} />
+          </div>
+          <div className="flex flex-col mb-[200px] mt-[80px] mx-[208px]">
+            {/* actors */}
             <p className="font-[700] mb-[12px]">Credit:</p>
             <p className="text-[14px]">
-              <Skeleton variant="text" width="100%" sx={{ fontSize: "1rem" }} />
-              <Skeleton variant="text" width="100%" sx={{ fontSize: "1rem" }} />
-              <Skeleton variant="text" width="100%" sx={{ fontSize: "1rem" }} />
-              <Skeleton variant="text" width="100%" sx={{ fontSize: "1rem" }} />
-              <Skeleton variant="text" width="100%" sx={{ fontSize: "1rem" }} />
-              <Skeleton variant="text" width="100%" sx={{ fontSize: "1rem" }} />
-              <Skeleton variant="text" width="100%" sx={{ fontSize: "1rem" }} />
+              <Skeleton
+                variant="text"
+                width={"100%"}
+                sx={{ fontSize: "2rem" }}
+              />
             </p>
           </div>
         </>
@@ -82,7 +99,7 @@ const Details = () => {
           {/* description */}
           <div className="mx-[208px]">{singleMovie?.overview}</div>
           {/* Credit */}
-          <div className="flex flex-col mb-[400px] mt-[80px] mx-[208px]">
+          <div className="flex flex-col mb-[200px] mt-[80px] mx-[208px]">
             {/* actors */}
             <p className="font-[700] mb-[12px]">Credit:</p>
             <p className="text-[14px]">
