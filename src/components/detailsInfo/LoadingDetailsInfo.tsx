@@ -4,8 +4,8 @@ const LoadingDetailsInfo = () => {
   return (
     <div className="mx-[208px] mb-[53px] flex">
       {/* image */}
-      <div className="w-[330px] h-[495px]">
-        <Skeleton variant="rounded" width={210} height={"100%"} />
+      <div className="w-[500px] h-[495px]">
+        <Skeleton variant="rounded" width={"500px"} height={"100%"} />
       </div>
       {/* info */}
       <div className="pl-[70px] pt-5 pr-8 w-full">

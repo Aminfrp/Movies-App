@@ -30,14 +30,24 @@ const DetailsInfo = ({ singleMovie }: { singleMovie: ISingleMovie | null }) => {
   return (
     <div className="mx-[208px] mb-[53px] flex">
       {/* image */}
-      <div className="w-[330px] h-[495px]">
-        <img
-          src={`https://image.tmdb.org/t/p/w500/${singleMovie?.poster_path}`}
-          className="w-[330px] h-[495px] rounded-[12px]"
-          width={"330px"}
-          height={"495px"}
-          alt={singleMovie?.title}
-        />
+      <div className="w-[500px] h-[495px]">
+        {singleMovie?.poster_path ? (
+          <img
+            src={`https://image.tmdb.org/t/p/w500/${singleMovie?.poster_path}`}
+            className="w-[500px] h-[495px] rounded-[12px]"
+            width={"500px"}
+            height={"495px"}
+            alt={singleMovie?.title}
+          />
+        ) : (
+          <img
+            src={`/images/no_image.png`}
+            className="w-[500px] h-[495px] rounded-[12px]"
+            width={"330px"}
+            height={"495px"}
+            alt={singleMovie?.title}
+          />
+        )}
       </div>
       {/* info */}
       <div className="pl-[70px] pt-5 pr-8 w-full">
