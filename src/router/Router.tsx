@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Details from "../pages/details/Details";
+import Error from "../pages/Error";
 import Home from "../pages/home/Home";
 
 const Router = () => {
@@ -43,7 +44,8 @@ const Router = () => {
             <Details pageNumber={pageNumber} setPageNumber={setPageNumber} />
           }
         />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/error" element={<Error />} />
+        <Route path="*" element={<Navigate to="/error" replace />} />
       </Routes>
     </BrowserRouter>
   );

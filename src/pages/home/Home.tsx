@@ -11,6 +11,8 @@ import Movies from "../../components/movies/Movies";
 import Pagination from "../../components/pagination/Pagination";
 import moviesAxios from "../../axios/moviesAxios";
 import { IGenres, IMovies } from "../../interfaces/movies";
+import { useSnackbar } from "notistack";
+import { useNavigate } from "react-router-dom";
 
 const Home = ({
   pageNumber,
@@ -47,7 +49,9 @@ const Home = ({
   const [movies, setMovies] = useState<IMovies | null>(null);
   const [genres, setGenres] = useState<IGenres | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  // pagination
+  // error snackbar
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   // get movies from server
   const getMoviesList = useCallback(
@@ -62,8 +66,10 @@ const Home = ({
         getGenresList();
         setMovies(response.data);
         setLoading(false);
-      } catch (error) {
+      } catch (error: any) {
         setLoading(false);
+        navigate("/error");
+        enqueueSnackbar(error.response.data.status_message);
       }
     },
     []
@@ -76,8 +82,10 @@ const Home = ({
       const response = await moviesAxios.getGenres();
       setGenres(response.data);
       setLoading(false);
-    } catch (error) {
+    } catch (error: any) {
       setLoading(false);
+      navigate("/error");
+      enqueueSnackbar(error.response.data.status_message);
     }
   }, []);
 

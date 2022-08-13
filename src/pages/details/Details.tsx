@@ -9,10 +9,11 @@ import DetailsHeader from "../../components/detailsHeader/DetailsHeader";
 import DetailsInfo from "../../components/detailsInfo/DetailsInfo";
 import { ICredits, ISingleMovie } from "../../interfaces/movies";
 import moviesAxios from "../../axios/moviesAxios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import LoadingDetailsHeader from "../../components/detailsHeader/LoadingDetailsHeader";
 import LoadingDetailsInfo from "../../components/detailsInfo/LoadingDetailsInfo";
 import { Skeleton } from "@mui/material";
+import { useSnackbar } from "notistack";
 
 const Details = ({
   pageNumber,
@@ -25,6 +26,8 @@ const Details = ({
   const [credits, setCredits] = useState<ICredits | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   // get movie
   const getSingleMovie = useCallback(async () => {
@@ -33,8 +36,10 @@ const Details = ({
       const response = await moviesAxios.getSingleMovie(parseInt(id as string));
       setSingleMovie(response.data);
       setLoading(false);
-    } catch (error) {
+    } catch (error: any) {
       setLoading(false);
+      enqueueSnackbar(error.response.data.status_message);
+      navigate("/404");
     }
   }, [id]);
 
@@ -47,8 +52,10 @@ const Details = ({
       );
       setCredits(response.data);
       setLoading(false);
-    } catch (error) {
+    } catch (error: any) {
       setLoading(false);
+      enqueueSnackbar(error.response.data.status_message);
+      navigate("/404");
     }
   }, [id]);
 
