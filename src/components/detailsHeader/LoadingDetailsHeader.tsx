@@ -22,13 +22,14 @@ const LoadingDetailsHeader = () => {
       {/* title */}
       <div className="flex flex-col ml-[64px]">
         <p className="font-[700] text-[18px]">
-          <Skeleton variant="text" width="10rem" sx={{ fontSize: "1rem" }} />
+          <Skeleton variant="text" sx={{ fontSize: "1rem" }} width="8rem" />
         </p>
         <p className="text-[18px] mt-[6px]">
-          <Skeleton variant="text" width="10rem" sx={{ fontSize: "1rem" }} />
+          <Skeleton variant="text" sx={{ fontSize: "1rem" }} width="8rem" />
         </p>
       </div>
     </div>
   );
 };
+
 export default LoadingDetailsHeader;
