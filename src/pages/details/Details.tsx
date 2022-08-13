@@ -1,11 +1,23 @@
-import { useCallback, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import DetailsHeader from "../../components/detailsHeader/DetailsHeader";
 import DetailsInfo from "../../components/detailsInfo/DetailsInfo";
 import { ICredits, ISingleMovie } from "../../interfaces/movies";
 import moviesAxios from "../../axios/moviesAxios";
 import { useParams } from "react-router-dom";
 
-const Details = () => {
+const Details = ({
+  pageNumber,
+  setPageNumber,
+}: {
+  pageNumber: number;
+  setPageNumber: Dispatch<SetStateAction<number>>;
+}) => {
   const [singleMovie, setSingleMovie] = useState<ISingleMovie | null>(null);
   const [credits, setCredits] = useState<ICredits | null>(null);
   const { id } = useParams();

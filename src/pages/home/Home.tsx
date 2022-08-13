@@ -1,29 +1,53 @@
-import { useCallback, useEffect, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import HomeFilter from "../../components/homeFilter/HomeFilter";
 import Movies from "../../components/movies/Movies";
 import Pagination from "../../components/pagination/Pagination";
 import moviesAxios from "../../axios/moviesAxios";
 import { IGenres, IMovies } from "../../interfaces/movies";
 
-const Home = () => {
-  // filter
-  const [releaseDates, setReleaseDates] = useState<[Date, Date]>([
-    new Date(),
-    new Date(),
-  ]);
-  const [dateFilter, setDateFilter] = useState<boolean>(false);
-  const [filterFlag, setFilterFlag] = useState<boolean>(false);
-
+const Home = ({
+  pageNumber,
+  setPageNumber,
+  skip,
+  setSkip,
+  dateFilter,
+  filterFlag,
+  releaseDates,
+  setReleaseDates,
+  setDateFilter,
+  setFilterFlag,
+}: {
+  pageNumber: number;
+  setPageNumber: Dispatch<SetStateAction<number>>;
+  skip: {
+    start: number;
+    end: number;
+  };
+  setSkip: Dispatch<
+    React.SetStateAction<{
+      start: number;
+      end: number;
+    }>
+  >;
+  releaseDates: [Date, Date];
+  setReleaseDates: Dispatch<SetStateAction<[Date, Date]>>;
+  filterFlag: boolean;
+  dateFilter: boolean;
+  setDateFilter: Dispatch<SetStateAction<boolean>>;
+  setFilterFlag: Dispatch<SetStateAction<boolean>>;
+}) => {
   // data
   const [movies, setMovies] = useState<IMovies | null>(null);
   const [genres, setGenres] = useState<IGenres | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   // pagination
-  const [pageNumber, setPageNumber] = useState<number>(1);
-  const [skip, setSkip] = useState<{ start: number; end: number }>({
-    start: 1,
-    end: 20,
-  });
 
   // get movies from server
   const getMoviesList = useCallback(
@@ -70,7 +94,7 @@ const Home = () => {
   const handleNextPage = () => {
     if (pageNumber !== 500 && movies?.page !== movies?.total_pages) {
       setPageNumber(pageNumber + 1);
-      setSkip({ start: skip.end, end: skip.end + 20 });
+      setSkip({ start: skip.end + 1, end: skip.end + 20 });
     }
   };
 
@@ -88,6 +112,7 @@ const Home = () => {
   // filter movies
   const searchMovies = async () => {
     setPageNumber(1);
+    setSkip({ start: 1, end: 20 });
     setFilterFlag(true);
     await getMoviesList(pageNumber, releaseDates, dateFilter);
   };
@@ -102,6 +127,7 @@ const Home = () => {
         searchMovies={searchMovies}
         setFilterFlag={setFilterFlag}
         setPageNumber={setPageNumber}
+        setSkip={setSkip}
       />
       <Movies movies={movies} loading={loading} genres={genres} />
       <Pagination
