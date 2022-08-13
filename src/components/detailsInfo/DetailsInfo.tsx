@@ -1,3 +1,4 @@
+import { Rating } from "@mui/material";
 import { ISingleMovie } from "../../interfaces/movies";
 
 const DetailsInfo = ({ singleMovie }: { singleMovie: ISingleMovie | null }) => {
@@ -40,6 +41,7 @@ const DetailsInfo = ({ singleMovie }: { singleMovie: ISingleMovie | null }) => {
       </div>
       {/* info */}
       <div className="pl-[70px] pt-5 pr-8 w-full">
+        {/*Budget*/}
         <div className="my-[9px] flex justify-between">
           <p className="font-[700]">{Object.keys(informations)[0]}</p>
           <p>
@@ -49,7 +51,7 @@ const DetailsInfo = ({ singleMovie }: { singleMovie: ISingleMovie | null }) => {
               : 0}
           </p>
         </div>
-
+        {/*Revenue*/}
         <div className="my-[9px] flex justify-between">
           <p className="font-[700]">{Object.keys(informations)[1]}</p>
           <p>
@@ -59,12 +61,12 @@ const DetailsInfo = ({ singleMovie }: { singleMovie: ISingleMovie | null }) => {
               : 0}
           </p>
         </div>
-
+        {/*ReleaseDate*/}
         <div className="my-[9px] flex justify-between">
           <p className="font-[700]">{Object.keys(informations)[2]}</p>
           <p>{informations.ReleaseDate ? informations?.ReleaseDate : ""}</p>
         </div>
-
+        {/*Runtime*/}
         <div className="my-[9px] flex justify-between">
           <p className="font-[700]">{Object.keys(informations)[3]}</p>
           <p>
@@ -73,25 +75,37 @@ const DetailsInfo = ({ singleMovie }: { singleMovie: ISingleMovie | null }) => {
               : ""}
           </p>
         </div>
-
+        {/*Score*/}
         <div className="my-[9px] flex justify-between">
           <p className="font-[700]">{Object.keys(informations)[4]}</p>
-          <p>
-            {informations.Score ? (
-              <div>
-                <span>
-                  {Math.round(
-                    (informations?.Score.vote_average as number) * 10
-                  ) / 10}
-                </span>
-                <span className="text-[14px]">{` (${informations?.Score.vote_count} votes)`}</span>
-              </div>
-            ) : (
-              ""
-            )}
-          </p>
+          {informations.Score ? (
+            <div className="flex items-center justify-center gap-2">
+              <span>
+                {
+                  <Rating
+                    name="read-only"
+                    readOnly
+                    precision={0.1}
+                    max={5}
+                    value={
+                      Math.round(
+                        (informations?.Score.vote_average as number) * 10
+                      ) /
+                      10 /
+                      2
+                    }
+                  />
+                }
+              </span>
+              {Math.round((informations?.Score.vote_average as number) * 10) /
+                10}
+              <span className="text-[14px]">{` (${informations?.Score.vote_count} votes)`}</span>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
-
+        {/*Genres*/}
         <div className="my-[9px] flex justify-between">
           <p className="font-[700]">{Object.keys(informations)[5]}</p>
           <p>
@@ -106,7 +120,7 @@ const DetailsInfo = ({ singleMovie }: { singleMovie: ISingleMovie | null }) => {
               : ""}
           </p>
         </div>
-
+        {/*IMDB*/}
         <div className="my-[9px] flex justify-between">
           <p className="font-[700]">{Object.keys(informations)[6]}</p>
           <div>
@@ -122,7 +136,7 @@ const DetailsInfo = ({ singleMovie }: { singleMovie: ISingleMovie | null }) => {
             )}
           </div>
         </div>
-
+        {/*Homepage*/}
         <div className="my-[9px] flex justify-between">
           <p className="font-[700]">{Object.keys(informations)[7]}</p>
           {informations.Homepage ? (
