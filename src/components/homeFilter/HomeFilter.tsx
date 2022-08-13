@@ -14,6 +14,12 @@ interface Props {
   searchMovies: () => Promise<void>;
   setFilterFlag: Dispatch<SetStateAction<boolean>>;
   setPageNumber: Dispatch<SetStateAction<number>>;
+  setSkip: Dispatch<
+    React.SetStateAction<{
+      start: number;
+      end: number;
+    }>
+  >;
 }
 const HomeFilter = (props: Props) => {
   const {
@@ -22,8 +28,9 @@ const HomeFilter = (props: Props) => {
     setShowDate,
     showDate,
     searchMovies,
-    setFilterFlag,
     setPageNumber,
+    setSkip,
+    setFilterFlag,
   } = props;
   const [open, toggle] = useState<boolean>(false);
 
@@ -62,6 +69,7 @@ const HomeFilter = (props: Props) => {
                     setShowDate(false);
                     setFilterFlag(false);
                     setPageNumber(1);
+                    setSkip({ start: 1, end: 20 });
                   }}
                 />
               )}
