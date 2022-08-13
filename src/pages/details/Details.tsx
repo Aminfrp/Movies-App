@@ -41,7 +41,7 @@ const Details = ({
       enqueueSnackbar(error.response.data.status_message);
       navigate("/404");
     }
-  }, [id]);
+  }, [enqueueSnackbar, id, navigate]);
 
   // get credits
   const getCredits = useCallback(async () => {
@@ -57,7 +57,7 @@ const Details = ({
       enqueueSnackbar(error.response.data.status_message);
       navigate("/404");
     }
-  }, [id]);
+  }, [enqueueSnackbar, id, navigate]);
 
   useEffect(() => {
     getSingleMovie();
