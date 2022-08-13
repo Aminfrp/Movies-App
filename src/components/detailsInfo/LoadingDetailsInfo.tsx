@@ -5,7 +5,7 @@ const LoadingDetailsInfo = () => {
     <div className="mx-[208px] mb-[53px] flex">
       {/* image */}
       <div className="w-[330px] h-[495px]">
-        <Skeleton variant="rounded" style={{ height: "100%" }} />
+        <Skeleton variant="rounded" width={210} height={"100%"} />
       </div>
       {/* info */}
       <div className="pl-[70px] pt-5 pr-8 w-full">
@@ -38,7 +38,7 @@ const LoadingDetailsInfo = () => {
           </p>
         </div>
         {/*Score*/}
-        <div className="my-[9px] flex justify-between items-center">
+        <div className="my-[9px] flex justify-between">
           <p className="font-[700]">Score</p>
           <p>
             <Skeleton variant="text" width="2rem" sx={{ fontSize: "1rem" }} />
@@ -54,9 +54,9 @@ const LoadingDetailsInfo = () => {
         {/*IMDB*/}
         <div className="my-[9px] flex justify-between">
           <p className="font-[700]">IMDB</p>
-          <div>
+          <p>
             <Skeleton variant="text" width="2rem" sx={{ fontSize: "1rem" }} />
-          </div>
+          </p>
         </div>
         {/*Homepage*/}
         <div className="my-[9px] flex justify-between">
