@@ -64,7 +64,7 @@ const DetailsInfo = ({ singleMovie }: { singleMovie: ISingleMovie | null }) => {
         {/*ReleaseDate*/}
         <div className="my-[9px] flex justify-between">
           <p className="font-[700]">{Object.keys(informations)[2]}</p>
-          <p>{informations.ReleaseDate ? informations?.ReleaseDate : ""}</p>
+          <p>{informations.ReleaseDate ? informations?.ReleaseDate : "_"}</p>
         </div>
         {/*Runtime*/}
         <div className="my-[9px] flex justify-between">
@@ -72,7 +72,7 @@ const DetailsInfo = ({ singleMovie }: { singleMovie: ISingleMovie | null }) => {
           <p>
             {informations.Runtime
               ? secondsToHms((informations?.Runtime as number) * 60)
-              : ""}
+              : "_"}
           </p>
         </div>
         {/*Score*/}
@@ -102,7 +102,7 @@ const DetailsInfo = ({ singleMovie }: { singleMovie: ISingleMovie | null }) => {
               <span className="text-[14px]">{` (${informations?.Score.vote_count} votes)`}</span>
             </div>
           ) : (
-            ""
+            "_"
           )}
         </div>
         {/*Genres*/}
@@ -117,7 +117,7 @@ const DetailsInfo = ({ singleMovie }: { singleMovie: ISingleMovie | null }) => {
                       : genre.name + " , "}
                   </span>
                 ))
-              : ""}
+              : "_"}
           </p>
         </div>
         {/*IMDB*/}
@@ -132,7 +132,7 @@ const DetailsInfo = ({ singleMovie }: { singleMovie: ISingleMovie | null }) => {
                 Link
               </a>
             ) : (
-              ""
+              "_"
             )}
           </div>
         </div>
@@ -147,7 +147,7 @@ const DetailsInfo = ({ singleMovie }: { singleMovie: ISingleMovie | null }) => {
               Link
             </a>
           ) : (
-            ""
+            "_"
           )}
         </div>
       </div>
