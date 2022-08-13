@@ -28,11 +28,20 @@ const Movie = (props: Props) => {
         style={{ transition: "ease 0.5s" }}
       >
         {/* poster */}
-        <img
-          src={`https://image.tmdb.org/t/p/w500/${imageUrl}`}
-          alt={title}
-          className="w-[128px] p-[3px] h-full rounded-l-[6px]"
-        />
+        {imageUrl ? (
+          <img
+            src={`https://image.tmdb.org/t/p/w500/${imageUrl}`}
+            alt={title}
+            className="w-[128px] p-[3px] h-full rounded-l-[6px]"
+          />
+        ) : (
+          <img
+            src={`/images/no_image.png`}
+            alt={title}
+            className="w-[128px] p-[3px] h-full rounded-l-[6px]"
+          />
+        )}
+
         {/* desctioption of movie */}
         <div className="flex flex-col justify-between pr-[17px]">
           <p className="pl-[14px] pt-[16px] font-[700]">{title}</p>
