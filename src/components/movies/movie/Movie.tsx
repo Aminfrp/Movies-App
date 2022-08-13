@@ -1,13 +1,26 @@
 import { Link } from "react-router-dom";
+import { IGenres } from "../../../interfaces/movies";
+import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 interface Props {
   title: string;
   imageUrl: string;
   releaseDate: string;
   to: string;
+  genres: number[];
+  allGenres: IGenres | null;
 }
 const Movie = (props: Props) => {
-  const { title, releaseDate, imageUrl, to } = props;
+  const { title, releaseDate, imageUrl, to, genres, allGenres } = props;
+
+  // get movie genres
+  const showGenres = () => {
+    const movieGenres = allGenres?.genres.filter((genre) =>
+      genres.includes(genre.id)
+    );
+    return movieGenres;
+  };
+
   return (
     <Link to={to}>
       <div
@@ -35,7 +48,17 @@ const Movie = (props: Props) => {
             </div>
             {/* ganre */}
             <p className="pl-[14px] pt-[14px] pb-[28px] text-[#505050] text-[12px]">
-              Action . Action . Action
+              {showGenres()?.map((genre, key) => (
+                <span key={key} className="text-[#505050]">
+                  {genre.name}
+                  {key + 1 !== showGenres()?.length && (
+                    <FiberManualRecordIcon
+                      className="mx-[7px]"
+                      sx={{ fontSize: "8px" }}
+                    />
+                  )}
+                </span>
+              ))}
             </p>
           </div>
         </div>

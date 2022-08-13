@@ -3,7 +3,7 @@ import HomeFilter from "../../components/homeFilter/HomeFilter";
 import Movies from "../../components/movies/Movies";
 import Pagination from "../../components/pagination/Pagination";
 import moviesAxios from "../../axios/moviesAxios";
-import { IMovies } from "../../interfaces/movies";
+import { IGenres, IMovies } from "../../interfaces/movies";
 
 const Home = () => {
   // filter
@@ -16,6 +16,7 @@ const Home = () => {
 
   // data
   const [movies, setMovies] = useState<IMovies | null>(null);
+  const [genres, setGenres] = useState<IGenres | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   // pagination
   const [pageNumber, setPageNumber] = useState<number>(1);
@@ -34,6 +35,7 @@ const Home = () => {
           releaseDate,
           dateFilter
         );
+        getGenresList();
         setMovies(response.data);
         setLoading(false);
       } catch (error) {
@@ -42,6 +44,18 @@ const Home = () => {
     },
     []
   );
+
+  // get genres from server
+  const getGenresList = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await moviesAxios.getGenres();
+      setGenres(response.data);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (filterFlag) {
@@ -89,7 +103,7 @@ const Home = () => {
         setFilterFlag={setFilterFlag}
         setPageNumber={setPageNumber}
       />
-      <Movies movies={movies} loading={loading} />
+      <Movies movies={movies} loading={loading} genres={genres} />
       <Pagination
         movies={movies}
         handleNextPage={handleNextPage}

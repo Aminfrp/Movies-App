@@ -1,10 +1,11 @@
-import { IMovies } from "../../interfaces/movies";
+import { IGenres, IMovies } from "../../interfaces/movies";
 import LoadingMovie from "./movie/LoadingMovie";
 import Movie from "./movie/Movie";
 
 interface Props {
   movies: IMovies | null;
   loading: boolean;
+  genres: IGenres | null;
 }
 
 const Movies = (props: Props) => {
@@ -19,6 +20,8 @@ const Movies = (props: Props) => {
               imageUrl={movie.poster_path}
               releaseDate={movie.release_date}
               to={`/details/${movie.id}`}
+              genres={movie.genre_ids}
+              allGenres={props.genres}
             />
           ))}
     </div>

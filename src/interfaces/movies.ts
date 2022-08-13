@@ -79,3 +79,41 @@ export interface ISingleMovie {
   revenue: number;
   runtime: number;
 }
+
+export interface ICredits {
+  id: number;
+  cast: ICast[];
+  crew: ICrew[];
+}
+
+export interface ICast {
+  adult: boolean;
+  gender: number | null;
+  known_for_department: string;
+  id: number;
+  name: string;
+  character: string;
+  credit_id: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  cast_id: number;
+  order: number;
+}
+export interface ICrew {
+  adult: boolean;
+  gender: number | null;
+  known_for_department: string;
+  id: number;
+  name: string;
+  credit_id: string;
+  original_name: string;
+  popularity: number;
+  profile_path: string;
+  department: string;
+  job: string;
+}
+
+export interface IGenres {
+  genres: { name: string; id: number }[];
+}

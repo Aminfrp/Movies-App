@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IMovies, ISingleMovie } from "../interfaces/movies";
+import { ICredits, IGenres, IMovies, ISingleMovie } from "../interfaces/movies";
 import { apiKey, baseUrl } from "../utails";
 
 const instance = axios.create({
@@ -8,6 +8,7 @@ const instance = axios.create({
 });
 
 const apis = {
+  // get all movies
   getMovies: (
     pageNumber: number,
     releaseDate?: Date[],
@@ -25,8 +26,17 @@ const apis = {
       params: { page: pageNumber },
     });
   },
+  // get single movie
   getSingleMovie: (movieId: number) => {
     return instance.get<ISingleMovie>(`/movie/${movieId}`);
+  },
+  // get all credits
+  getMovieCredits: (movieId: number) => {
+    return instance.get<ICredits>(`/movie/${movieId}/credits`);
+  },
+  // get all genres
+  getGenres: () => {
+    return instance.get<IGenres>(`/genre/movie/list`);
   },
 };
 
